@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!-- Berkeley Humanoid Lite (BHL) Robot Model .xml file
     In MuJoCo MJCF format
      - 12 DOF (6 per leg: hip roll/yaw/pitch, knee pitch, ankle pitch/roll)
@@ -5,7 +6,6 @@
      - Sensors: Joint Position, IMU, and CoM tracking.
      - Requires: scenealt.xml, BHLasset (folder) containing 42.stl files
 -->
-<?xml version="1.0" encoding="UTF-8"?>
 <mujoco model="mjcf">
   <include file="scenealt.xml"/>
   <compiler angle="radian" meshdir="BHLasset"/>
