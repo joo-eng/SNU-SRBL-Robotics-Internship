@@ -1,5 +1,5 @@
 <mujoco model="simple pendulum">
-  <include file="scene.xml"/>
+  <include file="scenealt.xml"/>
   <compiler angle="radian"/>
   <worldbody>
     <body name="pivot" pos="0 0 2">
