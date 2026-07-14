@@ -1,0 +1,274 @@
+<!-- Berkeley Humanoid Lite (BHL) Robot Model .xml file
+    In MuJoCo MJCF format
+     - 12 DOF (6 per leg: hip roll/yaw/pitch, knee pitch, ankle pitch/roll)
+     - Dual motor setup: 6512 actuators on primary joints, 5010 on ankle joints
+     - Sensors: Joint Position, IMU, and CoM tracking.
+     - Requires: scenealt.xml, BHLasset (folder) containing 42.stl files
+-->
+<?xml version="1.0" encoding="UTF-8"?>
+<mujoco model="mjcf">
+  <include file="scenealt.xml"/>
+  <compiler angle="radian" meshdir="BHLasset"/>
+
+  <asset>
+    <mesh name="aluminum_extrusion_200mm_3" content_type="model/stl" file="aluminum_extrusion_200mm_3.stl"/>
+    <mesh name="aluminum_extrusion_150mm_2" content_type="model/stl" file="aluminum_extrusion_150mm_2.stl"/>
+    <mesh name="aluminum_extrusion_200mm_4" content_type="model/stl" file="aluminum_extrusion_200mm_4.stl"/>
+    <mesh name="housing_middle" content_type="model/stl" file="housing_middle.stl"/>
+    <mesh name="stopper_y_l" content_type="model/stl" file="stopper_y_l.stl"/>
+    <mesh name="aluminum_extrusion_200mm_1" content_type="model/stl" file="aluminum_extrusion_200mm_1.stl"/>
+    <mesh name="aluminum_extrusion_100mm_3" content_type="model/stl" file="aluminum_extrusion_100mm_3.stl"/>
+    <mesh name="stopper_y_r" content_type="model/stl" file="stopper_y_r.stl"/>
+    <mesh name="aluminum_extrusion_200mm_2" content_type="model/stl" file="aluminum_extrusion_200mm_2.stl"/>
+    <mesh name="aluminum_extrusion_250mm_1" content_type="model/stl" file="aluminum_extrusion_250mm_1.stl"/>
+    <mesh name="aluminum_extrusion_150mm_1" content_type="model/stl" file="aluminum_extrusion_150mm_1.stl"/>
+    <mesh name="aluminum_extrusion_100mm_center" content_type="model/stl" file="aluminum_extrusion_100mm_center.stl"/>
+    <mesh name="aluminum_extrusion_250mm_2" content_type="model/stl" file="aluminum_extrusion_250mm_2.stl"/>
+    <mesh name="aluminum_extrusion_100mm_4" content_type="model/stl" file="aluminum_extrusion_100mm_4.stl"/>
+    <mesh name="motor_shell" content_type="model/stl" file="motor_shell.stl"/>
+    <mesh name="housing_front" content_type="model/stl" file="housing_front.stl"/>
+    <mesh name="housing_rear" content_type="model/stl" file="housing_rear.stl"/>
+    <mesh name="imu_link" content_type="model/stl" file="imu_link.stl"/>
+    <mesh name="upperleg_x_housing_middle" content_type="model/stl" file="upperleg_x_housing_middle.stl"/>
+    <mesh name="stopper_z" content_type="model/stl" file="stopper_z.stl"/>
+    <mesh name="rear_struct" content_type="model/stl" file="rear_struct.stl"/>
+    <mesh name="stopper_u_r" content_type="model/stl" file="stopper_u_r.stl"/>
+    <mesh name="rear_struct_r" content_type="model/stl" file="rear_struct_r.stl"/>
+    <mesh name="housing_middle_r" content_type="model/stl" file="housing_middle_r.stl"/>
+    <mesh name="geometry_stud_upperleg" content_type="model/stl" file="geometry_stud_upperleg.stl"/>
+    <mesh name="rear_struct__2" content_type="model/stl" file="rear_struct__2.stl"/>
+    <mesh name="ankle_mount_2" content_type="model/stl" file="ankle_mount_2.stl"/>
+    <mesh name="housing_front_ankle" content_type="model/stl" file="housing_front_ankle.stl"/>
+    <mesh name="geometry_stud_lowerleg" content_type="model/stl" file="geometry_stud_lowerleg.stl"/>
+    <mesh name="ankle_mount" content_type="model/stl" file="ankle_mount.stl"/>
+    <mesh name="motor_shell__2" content_type="model/stl" file="motor_shell__2.stl"/>
+    <mesh name="housing_rear__2" content_type="model/stl" file="housing_rear__2.stl"/>
+    <mesh name="feet_mount_l" content_type="model/stl" file="feet_mount_l.stl"/>
+    <mesh name="feet_mount_2_l" content_type="model/stl" file="feet_mount_2_l.stl"/>
+    <mesh name="flat_foot" content_type="model/stl" file="flat_foot.stl"/>
+    <mesh name="housing_front__2" content_type="model/stl" file="housing_front__2.stl"/>
+    <mesh name="housing_middle__2" content_type="model/stl" file="housing_middle__2.stl"/>
+    <mesh name="stopper_u_l" content_type="model/stl" file="stopper_u_l.stl"/>
+    <mesh name="housing_middle_l" content_type="model/stl" file="housing_middle_l.stl"/>
+    <mesh name="rear_struct_l" content_type="model/stl" file="rear_struct_l.stl"/>
+    <mesh name="feet_mount_2_r" content_type="model/stl" file="feet_mount_2_r.stl"/>
+    <mesh name="feet_mount_r" content_type="model/stl" file="feet_mount_r.stl"/>
+  </asset>
+
+  <worldbody>
+    <body name="torso" pos="0 0 -0.4405" quat="1 0 0 0">
+      <inertial pos="-0.00567 0 0.02205" quat="0.999855 0 0.017039 0" mass="3.2" diaginertia="0.04457 0.03322 0.02064"/>
+      <joint name="torso_free" type="free"/>
+      <site name="torso_center" pos="0 0 0" size="0.01"/>
+      <!-- Aluminum extrusions & Housing Geoms-->
+      <geom pos="0 0 0" quat="0.707105 0 0 -0.707108" type="mesh" rgba="0.2 0.2 0.2 1" mesh="aluminum_extrusion_200mm_3"/>
+      <geom pos="0 0 0" quat="0.707105 0 0 -0.707108" type="mesh" rgba="0.2 0.2 0.2 1" mesh="aluminum_extrusion_150mm_2"/>
+      <geom pos="0 0 0" quat="0.707105 0 0 -0.707108" type="mesh" rgba="0.2 0.2 0.2 1" mesh="aluminum_extrusion_200mm_4"/>
+      <geom pos="-0.0276777 0 -0.055955" quat="0.707105 0 0 -0.707108" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="housing_middle"/>
+      <geom pos="-0.0276777 0.08 -0.055955" quat="-0.270598 -0.270598 -0.653282 0.653281" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="stopper_y_l"/>
+      <geom pos="0 0 0" quat="0.707105 0 0 -0.707108" type="mesh" rgba="0.2 0.2 0.2 1" mesh="aluminum_extrusion_200mm_1"/>
+      <geom pos="0 0 0" quat="0.707105 0 0 -0.707108" type="mesh" rgba="0.2 0.2 0.2 1" mesh="aluminum_extrusion_100mm_3"/>
+      <geom pos="-0.0276777 -0.08 -0.055955" quat="0.270599 -0.270597 0.653283 0.65328" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="stopper_y_r"/>
+      <geom pos="0 0 0" quat="0.707105 0 0 -0.707108" type="mesh" rgba="0.2 0.2 0.2 1" mesh="aluminum_extrusion_200mm_2"/>
+      <geom pos="0 0 0" quat="0.707105 0 0 -0.707108" type="mesh" rgba="0.2 0.2 0.2 1" mesh="aluminum_extrusion_250mm_1"/>
+      <geom pos="0 0 0" quat="0.707105 0 0 -0.707108" type="mesh" rgba="0.2 0.2 0.2 1" mesh="aluminum_extrusion_150mm_1"/>
+      <geom pos="0 0 0" quat="0.707105 0 0 -0.707108" type="mesh" rgba="0.2 0.2 0.2 1" mesh="aluminum_extrusion_100mm_center"/>
+      <geom pos="0 0 0" quat="0.707105 0 0 -0.707108" type="mesh" rgba="0.2 0.2 0.2 1" mesh="aluminum_extrusion_250mm_2"/>
+      <geom pos="0 0 0" quat="0.707105 0 0 -0.707108" type="mesh" rgba="0.2 0.2 0.2 1" mesh="aluminum_extrusion_100mm_4"/>
+      <geom pos="-0.00434315 0.08 -0.032620" quat="0.382683 -7.18056e-07 -0.92388 7.18056e-07" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="motor_shell"/>
+      <geom pos="-0.0276777 0.08 -0.055955" quat="0.382683 -7.18056e-07 -0.92388 7.18056e-07" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="housing_front"/>
+      <geom pos="-0.0276777 0.08 -0.055955" quat="0.382683 -7.18056e-07 -0.92388 7.18056e-07" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="housing_rear"/>
+      <geom pos="-0.00434315 -0.08 -0.032620" quat="0.382683 -7.18056e-07 -0.92388 7.18056e-07" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="motor_shell"/>
+      <geom pos="-0.0276777 -0.08 -0.055955" quat="0.382683 -7.18056e-07 -0.92388 7.18056e-07" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="housing_front"/>
+      <geom pos="-0.0276777 -0.08 -0.055955" quat="0.382683 -7.18056e-07 -0.92388 7.18056e-07" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="housing_rear"/>
+      <geom pos="0.0615339 0 0.08" quat="1.32679e-06 0 0 1" type="mesh" rgba="0.141176 0.694118 0.65098 1" mesh="imu_link"/>
+      <!--Left leg geometry-->
+      <body name="leg_left_hip_roll" pos="-0.0290919 0.08 -0.057369" quat="0.92388 0 0.382683 0">
+        <inertial pos="-0.00410941 -0.000112596 -0.0464623" quat="0.998579 -0.0134956 0.0323242 0.0401686" mass="0.83786" diaginertia="0.00098151 0.00089565 0.000726479"/>
+        <joint name="leg_left_hip_roll_joint" pos="0 0 0" axis="0 0 1" range="-0.174533 1.5708" actuatorfrcrange="-14 14"/>
+        <geom pos="0 0 0" quat="0.499998 0.5 0.5 -0.500002" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="upperleg_x_housing_middle"/>
+        <geom pos="0.025 0 -0.052" quat="0.0980187 0.995185 0 0" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="stopper_z"/>
+        <geom pos="-0.039 0 -0.052" quat="0.703702 -0.0693075 -0.703702 0.0693075" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="rear_struct"/>
+        <geom pos="-0.008 0 -0.052" quat="0.546599 0.448584 0.546603 0.448584" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="motor_shell"/>
+        <geom pos="0.025 0 -0.052" quat="0.546599 0.448584 0.546603 0.448584" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="housing_front"/>
+        <geom pos="0.025 0 -0.052" quat="0.546599 0.448584 0.546603 0.448584" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="housing_rear"/>
+        
+        <body name="leg_left_hip_yaw" pos="0.027 0 -0.052" quat="0.499998 -0.5 0.500002 -0.5">
+          <inertial pos="-0.00411632 -8.63203e-05 0.0463382" quat="0.999084 -0.0161651 -0.0382793 -0.010234" mass="0.837683" diaginertia="0.000980566 0.000898328 0.00072259"/>
+          <joint name="leg_left_hip_yaw_joint" pos="0 0 0" axis="0 0 1" range="-0.981748 0.589049" actuatorfrcrange="-14 14"/>
+          <geom pos="0.025 0.12472 0.135336" quat="0.471399 0.88192 0 0" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="stopper_u_r"/>
+          <geom pos="0 0 0" quat="0.499998 -0.5 -0.5 -0.500002" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="upperleg_x_housing_middle"/>
+          <geom pos="-0.039 0 0.052" quat="0.0693049 0.703702 -0.06931 -0.703702" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="rear_struct"/>
+          <geom pos="-0.008 0 0.052" quat="0.448582 -0.546601 0.448586 -0.546601" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="motor_shell"/>
+          <geom pos="0.025 0 0.052" quat="0.448582 -0.546601 0.448586 -0.546601" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="housing_front"/>
+          <geom pos="0.025 0 0.052" quat="0.448582 -0.546601 0.448586 -0.546601" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="housing_rear"/>
+          
+          <body name="leg_left_hip_pitch" pos="0.027 0 0.052" quat="0.65328 0.270598 -0.653282 -0.270598">
+            <inertial pos="0.0030405 0.120388 0.0210924" quat="0.761917 0.646837 0.0270389 0.0188058" mass="0.947974" diaginertia="0.00287266 0.00264321 0.000972851"/>
+            <joint name="leg_left_hip_pitch_joint" pos="0 0 0" axis="0 0 1" range="-1.89805 0.981748" actuatorfrcrange="-14 14"/>
+            <geom pos="0 0.15 -0.013" quat="0.499998 0.5 0.5 -0.500002" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="rear_struct_r"/>
+            <geom pos="0 0.15 -0.013" quat="0.499998 0.5 0.5 -0.500002" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="housing_middle_r"/>
+            <geom pos="0.00597627 0.004 0.0295" quat="0.499998 0.5 0.5 -0.500002" type="mesh" rgba="0.654902 0.584314 0.823529 1" mesh="geometry_stud_upperleg"/>
+            <geom pos="0 0.15 0.017" quat="5.07745e-07 -0.382686 0.923879 -1.2258e-06" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="motor_shell"/>
+            <geom pos="0 0.15 -0.016" quat="5.07745e-07 0.382686 -0.923879 -1.2258e-06" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="housing_front"/>
+            <geom pos="0 0.15 -0.016" quat="5.07745e-07 0.382686 -0.923879 -1.2258e-06" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="housing_rear"/>
+            
+            <body name="leg_left_knee_pitch" pos="0 0.15 -0.018" quat="1.32679e-06 0 0 -1">
+              <inertial pos="-4.14041e-05 -0.112249 0.0257397" quat="0.716105 0.697988 -0.00189175 0.00175183" mass="0.653864" diaginertia="0.00230127 0.00203823 0.000558782"/>
+              <joint name="leg_left_knee_pitch_joint" pos="0 0 0" axis="0 0 1" range="0 2.44346" actuatorfrcrange="-14 14"/>
+              <geom pos="0 -0.16 0.06" quat="0.707105 0 0 -0.707108" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="rear_struct__2"/>
+              <geom pos="0 -0.16 0.022" quat="0.499998 -0.5 -0.5 -0.500002" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="ankle_mount_2"/>
+              <geom pos="0 -0.16 -0.001" quat="3.43402e-07 0.258821 0.965925 1.28158e-06" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="housing_front_ankle"/>
+              <geom pos="0 -0.02 0.022" quat="0.499998 -0.5 0.5 0.500002" type="mesh" rgba="0.647059 0.647059 0.647059 1" mesh="geometry_stud_lowerleg"/>
+              <geom pos="0 -0.16 0.022" quat="0.499998 -0.5 -0.5 -0.500002" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="ankle_mount"/>
+              <geom pos="0 -0.16 0.028" quat="9.38184e-07 0.707105 0.707108 9.38187e-07" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="motor_shell__2"/>
+              <geom pos="0 -0.16 -0.001" quat="9.38184e-07 0.707105 0.707108 9.38187e-07" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="housing_rear__2"/>
+              
+              <body name="leg_left_ankle_pitch" pos="0 -0.16 -0.003" quat="1.32679e-06 0 0 -1">
+                <inertial pos="0.0131065 0.0273743 0.0274153" quat="0.97446 -0.0895638 0.0341084 -0.203084" mass="0.106196" diaginertia="0.000199494 0.000133736 7.96933e-05"/>
+                <joint name="leg_left_ankle_pitch_joint" pos="0 0 0" axis="0 0 1" range="-0.785398 0.785398" actuatorfrcrange="-15 15"/>
+                <geom quat="0.499998 0.5 0.5 -0.500002" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="feet_mount_l"/>
+                <geom quat="0.499998 0.5 0.5 -0.500002" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="feet_mount_2_l"/>
+                
+                <body name="leg_left_ankle_roll" pos="0.03 0.05 0.025" quat="0.707105 0 0.707108 0">
+                  <inertial pos="2.29341e-05 0.0226611 0.0197836" quat="0.99849 0.0548311 0.000143945 0.00326776" mass="0.706476" diaginertia="0.00198705 0.00191918 0.000603903"/>
+                  <joint name="leg_left_ankle_roll_joint" pos="0 0 0" axis="0 0 1" range="-0.261799 0.261799" actuatorfrcrange="-15 15"/>
+                  <geom pos="0 0 0.063" quat="0.707105 0.707108 0 0" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="flat_foot" contype="0" conaffinity="0"/>
+                  <geom name="left_foot_collision_box" type="box" pos="0 0.03194005 0.00573105" size="0.036 0.02446677 0.11068108" rgba="1 0 0 0.3"/>
+                  <geom pos="0 0 0.002" quat="1.32679e-06 1 0 0" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="housing_front__2" contype="0" conaffinity="0"/>
+                  <geom pos="0 0 0.031" quat="1.32679e-06 1 0 0" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="motor_shell__2" contype="0" conaffinity="0"/>
+                  <geom pos="0 0 0.002" quat="1.32679e-06 1 0 0" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="housing_middle__2" contype="0" conaffinity="0"/>
+                  <geom pos="0 0 0.002" quat="1.32679e-06 1 0 0" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="housing_rear__2" contype="0" conaffinity="0"/>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+
+      <!--Right leg geometry-->
+      <body name="leg_right_hip_roll" pos="-0.0290919 -0.08 -0.057369" quat="1.2258e-06 0.382683 -5.07742e-07 0.92388">
+        <inertial pos="0.00410941 -0.00018505 -0.0464478" quat="0.99915 -0.0125114 -0.0311449 -0.0239221" mass="0.83786" diaginertia="0.000980934 0.000896266 0.000726135"/>
+        <joint name="leg_right_hip_roll_joint" pos="0 0 0" axis="0 0 1" range="-1.5708 0.174533" actuatorfrcrange="-14 14"/>
+        <geom quat="0.499998 -0.5 0.5 0.500002" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="upperleg_x_housing_middle"/>
+        <geom pos="-0.025 0 -0.052" quat="1.32041e-06 1.30049e-07 0.0980174 0.995185" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="stopper_z"/>
+        <geom pos="0.039 0 -0.052" quat="0.703702 -0.0693075 0.703702 -0.0693075" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="rear_struct"/>
+        <geom pos="0.008 0 -0.052" quat="0.546599 0.448584 -0.546603 -0.448584" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="motor_shell"/>
+        <geom pos="-0.025 0 -0.052" quat="0.546599 0.448584 -0.546603 -0.448584" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="housing_front"/>
+        <geom pos="-0.025 0 -0.052" quat="0.546599 0.448584 -0.546603 -0.448584" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="housing_rear"/>
+        
+        <body name="leg_right_hip_yaw" pos="-0.027 0 -0.052" quat="0.499998 -0.5 -0.500002 0.5">
+          <inertial pos="0.00411632 -1.3851e-05 0.0463238" quat="0.999168 -0.0154252 0.0370844 -0.00703098" mass="0.837683" diaginertia="0.00098034 0.000898597 0.000722286"/>
+          <joint name="leg_right_hip_yaw_joint" pos="0 0 0" axis="0 0 1" range="-0.589049 0.981748" actuatorfrcrange="-14 14"/>
+          <geom pos="0 0 0" quat="0.499998 0.5 -0.5 0.500002" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="upperleg_x_housing_middle"/>
+          <geom pos="-0.025 0.12472 0.135336" quat="0.471399 0.88192 0 0" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="stopper_u_l"/>
+          <geom pos="0.039 0 0.052" quat="0.0693049 0.703702 0.06931 0.703702" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="rear_struct"/>
+          <geom pos="0.008 0 0.052" quat="0.448582 -0.546601 -0.448586 0.546601" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="motor_shell"/>
+          <geom pos="-0.025 0 0.052" quat="0.448582 -0.546601 -0.448586 0.546601" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="housing_front"/>
+          <geom pos="-0.025 0 0.052" quat="0.448582 -0.546601 -0.448586 0.546601" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="housing_rear"/>
+          
+          <body name="leg_right_hip_pitch" pos="-0.027 0 0.052" quat="0.65328 0.270598 -0.653282 -0.270598">
+            <inertial pos="0.00319928 0.120388 -0.0210924" quat="0.646378 0.762188 0.00805307 0.0346537" mass="0.947974" diaginertia="0.00287232 0.00264204 0.000972473"/>
+            <joint name="leg_right_hip_pitch_joint" pos="0 0 0" axis="0 0 1" range="-1.89805 0.981748" actuatorfrcrange="-14 14"/>
+            <geom pos="0 0.15 0.013" quat="0.499998 0.5 0.5 -0.500002" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="housing_middle_l"/>
+            <geom pos="0 0.15 0.013" quat="0.499998 0.5 0.5 -0.500002" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="rear_struct_l"/>
+            <geom pos="0.00597627 0.004 -0.0295" quat="0.499998 0.5 0.5 -0.500002" type="mesh" rgba="0.654902 0.584314 0.823529 1" mesh="geometry_stud_upperleg"/>
+            <geom pos="0 0.15 -0.017" quat="0.92388 0 0 -0.382683" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="motor_shell"/>
+            <geom pos="0 0.15 0.016" quat="0.92388 0 0 -0.382683" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="housing_front"/>
+            <geom pos="0 0.15 0.016" quat="0.92388 0 0 -0.382683" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="housing_rear"/>
+            
+            <body name="leg_right_knee_pitch" pos="0 0.15 0.018">
+              <inertial pos="-5.09429e-05 0.112249 -0.0257397" quat="0.716106 0.697988 0.00180037 -0.00128014" mass="0.653864" diaginertia="0.00230127 0.00203824 0.00055878"/>
+              <joint name="leg_right_knee_pitch_joint" pos="0 0 0" axis="0 0 1" range="0 2.44346" actuatorfrcrange="-14 14"/>
+              <geom pos="0 0.16 0.001" quat="0.258821 0 0 0.965925" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="housing_front_ankle"/>
+              <geom pos="0 0.16 -0.022" quat="0.499998 0.5 0.5 -0.500002" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="ankle_mount"/>
+              <geom pos="0 0.16 -0.06" quat="9.38184e-07 -0.707105 -0.707108 9.38187e-07" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="rear_struct__2"/>
+              <geom pos="0 0.02 -0.022" quat="0.499998 0.5 0.5 -0.500002" type="mesh" rgba="0.647059 0.647059 0.647059 1" mesh="geometry_stud_lowerleg"/>
+              <geom pos="0 0.16 -0.022" quat="0.499998 0.5 0.5 -0.500002" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="ankle_mount_2"/>
+              <geom pos="0 0.16 -0.028" quat="0.707105 0 0 -0.707108" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="motor_shell__2"/>
+              <geom pos="0 0.16 0.001" quat="0.707105 0 0 -0.707108" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="housing_rear__2"/>
+              
+              <body name="leg_right_ankle_pitch" pos="0 0.16 0.003">
+                <inertial pos="0.0131065 0.0273743 -0.0274153" quat="0.97446 0.0895638 -0.0341084 -0.203084" mass="0.106196" diaginertia="0.000199494 0.000133736 7.96934e-05"/>
+                <joint name="leg_right_ankle_pitch_joint" pos="0 0 0" axis="0 0 1" range="-0.785398 0.785398" actuatorfrcrange="-15 15"/>
+                <geom quat="0.499998 0.5 0.5 -0.500002" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="feet_mount_2_r"/>
+                <geom quat="0.499998 0.5 0.5 -0.500002" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="feet_mount_r"/>
+                
+                <body name="leg_right_ankle_roll" pos="0.03 0.05 -0.025" quat="0.707105 0 0.707108 0">
+                  <inertial pos="2.29341e-05 0.0226611 0.0197836" quat="0.99849 0.0548311 0.000143945 0.00326776" mass="0.706476" diaginertia="0.00198705 0.00191918 0.000603903"/>
+                  <joint name="leg_right_ankle_roll_joint" pos="0 0 0" axis="0 0 1" range="-0.261799 0.261799" actuatorfrcrange="-15 15"/>
+                  <geom pos="0 0 0.063" quat="0.707105 0.707108 0 0" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="flat_foot" contype="0" conaffinity="0"/>
+                  <geom name="right_foot_collision_box" type="box" pos="0 0.03194005 0.00573105" size="0.036 0.02446677 0.11068108" rgba="1 0 0 0.3"/>
+                  <geom pos="0 0 0.002" quat="1.32679e-06 1 0 0" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="housing_front__2" contype="0" conaffinity="0"/>
+                  <geom pos="0 0 0.031" quat="1.32679e-06 1 0 0" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="motor_shell__2" contype="0" conaffinity="0"/>
+                  <geom pos="0 0 0.002" quat="1.32679e-06 1 0 0" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="housing_middle__2" contype="0" conaffinity="0"/>
+                  <geom pos="0 0 0.002" quat="1.32679e-06 1 0 0" type="mesh" rgba="0.933333 0.933333 0.933333 1" mesh="housing_rear__2" contype="0" conaffinity="0"/>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+  <!--Actuator types-->
+  <default>
+    <default class="actuator_6512">
+      <motor ctrlrange="-0.9333 0.9333" gear="15"/>
+    </default>
+    <default class="actuator_5010">
+      <motor ctrlrange="-1 1" gear="15"/>
+    </default>
+  </default>
+  <actuator>
+  <!-- 12 DoF structure-->
+    <motor name="leg_left_hip_roll_motor"   joint="leg_left_hip_roll_joint"   class="actuator_6512"/>
+    <motor name="leg_left_hip_yaw_motor"    joint="leg_left_hip_yaw_joint"    class="actuator_6512"/>
+    <motor name="leg_left_hip_pitch_motor"  joint="leg_left_hip_pitch_joint"  class="actuator_6512"/>
+    <motor name="leg_left_knee_pitch_motor" joint="leg_left_knee_pitch_joint" class="actuator_6512"/>
+    <motor name="leg_left_ankle_pitch_motor" joint="leg_left_ankle_pitch_joint" class="actuator_5010"/>
+    <motor name="leg_left_ankle_roll_motor"  joint="leg_left_ankle_roll_joint"  class="actuator_5010"/>
+    <motor name="leg_right_hip_roll_motor"   joint="leg_right_hip_roll_joint"   class="actuator_6512"/>
+    <motor name="leg_right_hip_yaw_motor"    joint="leg_right_hip_yaw_joint"    class="actuator_6512"/>
+    <motor name="leg_right_hip_pitch_motor"  joint="leg_right_hip_pitch_joint"  class="actuator_6512"/>
+    <motor name="leg_right_knee_pitch_motor" joint="leg_right_knee_pitch_joint" class="actuator_6512"/>
+    <motor name="leg_right_ankle_pitch_motor" joint="leg_right_ankle_pitch_joint" class="actuator_5010"/>
+    <motor name="leg_right_ankle_roll_motor"  joint="leg_right_ankle_roll_joint"  class="actuator_5010"/>
+  </actuator>
+  <sensor>
+    <!--Joint Positions-->
+    <jointpos name="leg_left_hip_roll_pos" joint="leg_left_hip_roll_joint"/>
+    <jointvel name="leg_left_hip_roll_vel" joint="leg_left_hip_roll_joint"/>
+    <jointpos name="leg_left_hip_yaw_pos" joint="leg_left_hip_yaw_joint"/>
+    <jointvel name="leg_left_hip_yaw_vel" joint="leg_left_hip_yaw_joint"/>
+    <jointpos name="leg_left_hip_pitch_pos" joint="leg_left_hip_pitch_joint"/>
+    <jointvel name="leg_left_hip_pitch_vel" joint="leg_left_hip_pitch_joint"/>
+    <jointpos name="leg_left_knee_pitch_pos" joint="leg_left_knee_pitch_joint"/>
+    <jointvel name="leg_left_knee_pitch_vel" joint="leg_left_knee_pitch_joint"/>
+    <jointpos name="leg_left_ankle_pitch_pos" joint="leg_left_ankle_pitch_joint"/>
+    <jointvel name="leg_left_ankle_pitch_vel" joint="leg_left_ankle_pitch_joint"/>
+    <jointpos name="leg_left_ankle_roll_pos" joint="leg_left_ankle_roll_joint"/>
+    <jointvel name="leg_left_ankle_roll_vel" joint="leg_left_ankle_roll_joint"/>
+  
+    <jointpos name="leg_right_hip_roll_pos" joint="leg_right_hip_roll_joint"/>
+    <jointvel name="leg_right_hip_roll_vel" joint="leg_right_hip_roll_joint"/>
+    <jointpos name="leg_right_hip_yaw_pos" joint="leg_right_hip_yaw_joint"/>
+    <jointvel name="leg_right_hip_yaw_vel" joint="leg_right_hip_yaw_joint"/>
+    <jointpos name="leg_right_hip_pitch_pos" joint="leg_right_hip_pitch_joint"/>
+    <jointvel name="leg_right_hip_pitch_vel" joint="leg_right_hip_pitch_joint"/>
+    <jointpos name="leg_right_knee_pitch_pos" joint="leg_right_knee_pitch_joint"/>
+    <jointvel name="leg_right_knee_pitch_vel" joint="leg_right_knee_pitch_joint"/>
+    <jointpos name="leg_right_ankle_pitch_pos" joint="leg_right_ankle_pitch_joint"/>
+    <jointvel name="leg_right_ankle_pitch_vel" joint="leg_right_ankle_pitch_joint"/>
+    <jointpos name="leg_right_ankle_roll_pos" joint="leg_right_ankle_roll_joint"/>
+    <jointvel name="leg_right_ankle_roll_vel" joint="leg_right_ankle_roll_joint"/>
+    <!--For IMU-->
+    <gyro name="torso_gyro" site="torso_center"/>
+    <accelerometer name="torso_accel" site="torso_center"/>
+    <!--COM tracking-->
+    <framepos name="torso_pos" objtype="body" objname="torso"/>
+    <framequat name="torso_quat" objtype="body" objname="torso"/>
+    <framelinvel name="torso_linvel" objtype="body" objname="torso"/>
+    <frameangvel name="torso_angvel" objtype="body" objname="torso"/>
+    </sensor>
+</mujoco>
