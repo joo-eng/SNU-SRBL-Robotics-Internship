@@ -5,7 +5,7 @@ Uses Jacobian-based inverse kinematics with PID balance control.
 READ THIS FIRST!
 Run with (macOS requires mjpython for the interactive viewer, not
 plain python) Other operating systems may have diferent ways of executing:
-mjpython "/Path_to_file/stand_pid_controller.py"
+mjpython "/Users/daniel/Desktop/SNU_SRBL/mjcf/stand_pid_controller.py"
 ALSO edit the path/name of xml right under def main() in line 95.
 """
 
@@ -29,11 +29,11 @@ ANKLE_PITCH_COMP = 0.0
 STAND_TORSO_QUAT = np.array([1.0, 0.0, 0.0, 0.0])
 
 # Balance Control (PID Gains)
-KP_XY, KD_XY = 60.0, 40.0 # Forward/Back stability
-KP_Z, KD_Z = 250.0, 107.0 # Height stability
-KP_ROT, KD_ROT = 20.0, 15.0 # Rotation (Proportional and Derivative)
-KI_ROT, ROT_I_LIMIT = 15.0, 0.3 # Rotation (Integral)
-YAW_DAMPING_FRACTION = 0.2 # Damping
+KP_XY, KD_XY = 30.0, 15.0 # Forward/Back stability
+KP_Z, KD_Z = 100.0, 20.0 # Height stability
+KP_ROT, KD_ROT = 15.0, 8.0 # Rotation (Proportional and Derivative)
+KI_ROT, ROT_I_LIMIT = 8.0, 0.1 # Rotation (Integral)
+YAW_DAMPING_FRACTION = 0.1 # Damping
 
 # Posture Control
 KP_POSTURE, KD_POSTURE = 0.0, 0.0
@@ -92,7 +92,7 @@ def find_standing_height(model, data, qadr, targets): # Find the CoM height wher
     return lo
 
 def main(): # Initialize the robot model and run the balance control loop.
-    model = mujoco.MjModel.from_xml_path("/Path/to/file/name_of_file.xml")
+    model = mujoco.MjModel.from_xml_path("/Users/daniel/Desktop/SNU_SRBL/mjcf/BHL.xml")
     data = mujoco.MjData(model)
 
     torso_id = mujoco.mj_name2id(model, mujoco.mjtObj.mjOBJ_BODY, "torso")
@@ -140,7 +140,6 @@ def main(): # Initialize the robot model and run the balance control loop.
     com0 = data.subtree_com[torso_id].copy()
     target_xy = com0[:2].copy()
     target_z = com0[2]
-    com_prev = com0.copy()
 
     Jcom = np.zeros((3, model.nv))
     Jrot = np.zeros((3, model.nv))
@@ -156,8 +155,7 @@ def main(): # Initialize the robot model and run the balance control loop.
             Jrot_leg = Jrot[:, leg_dof_idx_ctrl]
 
             com = data.subtree_com[torso_id]
-            com_vel = (com - com_prev) / dt
-            com_prev = com.copy()
+            com_vel = data.subtree_linvel[torso_id]
 
             quat = data.sensordata[quat_adr : quat_adr + 4]
             roll, pitch = quat_to_roll_pitch(quat)
@@ -165,12 +163,12 @@ def main(): # Initialize the robot model and run the balance control loop.
             R = data.xmat[torso_id].reshape(3, 3)
             gyro_world = R @ gyro_local
 
-            roll_i = np.clip(roll_i + (0.0 - roll) * dt, -ROT_I_LIMIT, ROT_I_LIMIT)
-            pitch_i = np.clip(pitch_i + (0.0 - pitch) * dt, -ROT_I_LIMIT, ROT_I_LIMIT)
+            roll_i = 0.0
+            pitch_i = 0.0
 
             fx = mtotal * (KP_XY * (target_xy[0] - com[0]) - KD_XY * com_vel[0])
             fy = mtotal * (KP_XY * (target_xy[1] - com[1]) - KD_XY * com_vel[1])
-            fz = mtotal * g + mtotal * (KP_Z * (target_z - com[2]) - KD_Z * com_vel[2])
+            fz = mtotal * g + mtotal * KP_Z * (target_z - com[2]) - mtotal * KD_Z * com_vel[2]
             f_com = np.array([fx, fy, fz])
 
             mx = KP_ROT * (0.0 - roll) - KD_ROT * gyro_world[0] + KI_ROT * roll_i
@@ -180,18 +178,11 @@ def main(): # Initialize the robot model and run the balance control loop.
 
             tau_com = Jcom_leg.T @ f_com
             tau_rot = Jrot_leg.T @ m_des
-
-            j_task = np.vstack([Jcom_leg, Jrot_leg])
-            j_task_pinv = np.linalg.pinv(j_task)
-            nullspace = np.eye(n) - j_task_pinv @ j_task
-            jpos = np.array([data.sensordata[pos_adrs[k]] for k in ctrl_idx])
-            jvel = np.array([data.sensordata[vel_adrs[k]] for k in ctrl_idx])
-            targets_ctrl = joint_targets[ctrl_idx]
-            tau_posture_desired = KP_POSTURE * (targets_ctrl - jpos) - KD_POSTURE * jvel
-            tau_posture = nullspace @ tau_posture_desired
-
+            tau_posture = np.zeros(n)
             tau = tau_com + tau_rot + tau_posture
-
+            if 2.70 < data.time < 2.75:
+                print(f"t={data.time:.3f} | tau_com[knee indices]={tau_com[[3, 9]]} | tau_rot[knee indices]={tau_rot[[3, 9]]}")
+        
             tau_ctrl = tau / 15.0
 
             for k, joint_k in enumerate(ctrl_idx):
